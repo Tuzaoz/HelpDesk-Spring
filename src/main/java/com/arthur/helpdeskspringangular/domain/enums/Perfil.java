@@ -1,4 +1,4 @@
-package com.arthur.helpdeskspringangular.domains.enums;
+package com.arthur.helpdeskspringangular.domain.enums;
 
 public enum Perfil {
     ADMIN(0,"ROLE_ADMIN"),

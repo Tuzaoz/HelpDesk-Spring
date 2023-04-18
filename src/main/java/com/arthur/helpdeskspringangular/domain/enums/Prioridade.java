@@ -1,4 +1,4 @@
-package com.arthur.helpdeskspringangular.domains.enums;
+package com.arthur.helpdeskspringangular.domain.enums;
 
 public enum Prioridade {
     BAIXA(0,"BAIXA"),
