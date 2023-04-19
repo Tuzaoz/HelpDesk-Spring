@@ -2,19 +2,30 @@ package com.arthur.helpdeskspringangular.domain;
 
 import com.arthur.helpdeskspringangular.domain.enums.Prioridade;
 import com.arthur.helpdeskspringangular.domain.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Objects;
-
+@Entity
 public class Chamado {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataDeAbertura = LocalDate.now();
+    @JsonFormat(pattern = "dd/MM/yyyy")
+
     private LocalDate dataDeFechamento;
     private Prioridade prioridade;
     private Status status;
     private String titulo;
     private String observacoes;
+    @ManyToOne
+    @JoinColumn(name = "tecnico_id")
     private Tecnico tecnico;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     public Chamado() {
