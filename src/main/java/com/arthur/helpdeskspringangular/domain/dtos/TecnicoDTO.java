@@ -28,6 +28,8 @@ public class TecnicoDTO implements Serializable {
     protected LocalDate dataCricao = LocalDate.now();
 
     public TecnicoDTO() {
+        super();
+        setPerfil(Perfil.CLIENTE);
     }
 
     public TecnicoDTO(Tecnico obj) {
@@ -38,6 +40,7 @@ public class TecnicoDTO implements Serializable {
         this.senha = obj.getSenha();
         this.perfil = obj.getPerfil().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCricao = obj.getDataCricao();
+        setPerfil(Perfil.CLIENTE);
     }
 
     public Integer getId() {
