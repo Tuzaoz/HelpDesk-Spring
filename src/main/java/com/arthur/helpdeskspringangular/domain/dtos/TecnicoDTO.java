@@ -7,6 +7,7 @@ import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.FetchType;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -18,9 +19,13 @@ import java.util.stream.Collectors;
 public class TecnicoDTO implements Serializable {
     private static final long serialVersionUID=1L;
     protected Integer id;
+    @NotNull(message = "Campo Nome obrigatório")
     protected String nome;
+    @NotNull(message = "Campo CPF obrigatório")
     protected String cpf;
+    @NotNull(message = "Campo EMAIL obrigatório")
     protected String email;
+    @NotNull(message = "Campo Senha obrigatório")
     protected String senha;
 
     protected Set<Integer> perfil = new HashSet<>();
@@ -33,6 +38,7 @@ public class TecnicoDTO implements Serializable {
     }
 
     public TecnicoDTO(Tecnico obj) {
+        super();
         this.id = obj.getId();
         this.nome = obj.getNome();
         this.cpf = obj.getCpf();

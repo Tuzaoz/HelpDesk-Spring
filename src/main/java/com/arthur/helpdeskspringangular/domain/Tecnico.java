@@ -7,12 +7,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
 public class Tecnico extends Pessoa {
+    @Serial
     private static final long serialVersionUID = 1L;
     @JsonIgnore
     @OneToMany(mappedBy = "tecnico")
@@ -20,10 +22,12 @@ public class Tecnico extends Pessoa {
 
     public Tecnico(Integer id, String nome, String cpf, String email, String senha) {
         super(id, nome, cpf, email, senha);
-        setPerfil(Perfil.TECNICO);
+        setPerfil(Perfil.CLIENTE);
+
 
     }
     public Tecnico(TecnicoDTO obj) {
+        super();
         this.id = obj.getId();
         this.nome = obj.getNome();
         this.cpf = obj.getCpf();
@@ -35,7 +39,7 @@ public class Tecnico extends Pessoa {
 
     public Tecnico() {
         super();
-        setPerfil(Perfil.TECNICO);
+        setPerfil(Perfil.CLIENTE);
     }
 
     public List<Chamado> getChamados() {

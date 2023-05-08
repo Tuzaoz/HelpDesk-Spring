@@ -3,6 +3,7 @@ package com.arthur.helpdeskspringangular.resources;
 import com.arthur.helpdeskspringangular.domain.Tecnico;
 import com.arthur.helpdeskspringangular.domain.dtos.TecnicoDTO;
 import com.arthur.helpdeskspringangular.services.TecnicoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,6 @@ public class TecnicoController {
 
     @Autowired
     private TecnicoService tecnicoService;
-
     @GetMapping
     public ResponseEntity<List<TecnicoDTO>> findAll(){
         List<Tecnico> list = tecnicoService.findAll();
@@ -33,10 +33,16 @@ public class TecnicoController {
 
     }
     @PostMapping
-    public ResponseEntity<TecnicoDTO> create(@RequestBody TecnicoDTO tecnicoDTO){
+    public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO tecnicoDTO){
         Tecnico newtecnico = tecnicoService.add(tecnicoDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(newtecnico.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+    @PutMapping(value="/{id}")
+    public ResponseEntity<TecnicoDTO> update(@PathVariable Integer id,
+                                             @Valid @RequestBody TecnicoDTO objDTO){
+        Tecnico obj = tecnicoService.update(id,objDTO);
+        return ResponseEntity.ok().body(new TecnicoDTO(obj));
     }
 
 }

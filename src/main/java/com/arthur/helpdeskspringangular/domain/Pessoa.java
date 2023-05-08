@@ -3,6 +3,7 @@ package com.arthur.helpdeskspringangular.domain;
 import com.arthur.helpdeskspringangular.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
     protected String nome;
+    @CPF
     @Column(unique = true)
     protected String cpf;
     @Column(unique = true)
@@ -31,14 +33,17 @@ public class Pessoa implements Serializable {
 
     public Pessoa() {
         super();
+        setPerfil(Perfil.CLIENTE);
     }
 
     public Pessoa(Integer id, String nome, String cpf, String email, String senha) {
+        super();
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.senha = senha;
+        setPerfil(Perfil.CLIENTE);
     }
 
     public Integer getId() {

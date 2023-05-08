@@ -7,6 +7,7 @@ import com.arthur.helpdeskspringangular.repositories.PessoaRepository;
 import com.arthur.helpdeskspringangular.services.exceptions.DataIntegrityViolationException;
 import com.arthur.helpdeskspringangular.services.exceptions.ObjectNotFoundExcpetion;
 import com.arthur.helpdeskspringangular.repositories.TecnicoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,14 @@ public class TecnicoService {
         return tecnico;
     }
 
+    public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
+        objDTO.setId(id);
+        Tecnico oldObj = findById(id);
+        ValidCpfEmail(objDTO);
+        oldObj = new Tecnico(objDTO);
+        return tecnicoRepository.save(oldObj);
+    }
+
     private void ValidCpfEmail(TecnicoDTO tecnicoDTO) {
         Optional<Pessoa> obj = pessoaRepository.findByCpf(tecnicoDTO.getCpf());
         if(obj.isPresent() && obj.get().getId() != tecnicoDTO.getId()){
@@ -43,8 +52,9 @@ public class TecnicoService {
         }
 
         obj = pessoaRepository.findByEmail(tecnicoDTO.getEmail());
-        if(obj.isPresent() && obj.get().getId() != tecnicoDTO.getId());{
+        if(obj.isPresent() && obj.get().getId() != tecnicoDTO.getId()) {
             throw new DataIntegrityViolationException("email já cadastrado no sistema");
         }
+
     }
 }
