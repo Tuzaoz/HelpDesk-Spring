@@ -57,4 +57,11 @@ public class TecnicoService {
         }
 
     }
+
+    public void delete(Integer id) {
+        Tecnico obj = findById(id);
+        if (obj.getChamados().size() > 0){
+            throw new DataIntegrityViolationException("Ordens de serviços em aberto");
+        } tecnicoRepository.deleteById(id);
+    }
 }
