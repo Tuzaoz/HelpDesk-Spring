@@ -3,20 +3,17 @@ package com.arthur.helpdeskspringangular.domain.dtos;
 import com.arthur.helpdeskspringangular.domain.Tecnico;
 import com.arthur.helpdeskspringangular.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.FetchType;
 import jakarta.validation.constraints.NotNull;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TecnicoDTO implements Serializable {
+    @Serial
     private static final long serialVersionUID=1L;
     protected Integer id;
     @NotNull(message = "Campo Nome obrigatório")

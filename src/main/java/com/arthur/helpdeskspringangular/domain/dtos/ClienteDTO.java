@@ -1,11 +1,11 @@
 package com.arthur.helpdeskspringangular.domain.dtos;
 
 import com.arthur.helpdeskspringangular.domain.Cliente;
-import com.arthur.helpdeskspringangular.domain.Tecnico;
 import com.arthur.helpdeskspringangular.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -13,7 +13,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ClienteDTO implements Serializable {
-    private static final long serialVersionUID=1L;
+
+    @Serial
+    private static final long serialVersionUID = -4333557115818058190L;
     protected Integer id;
     @NotNull(message = "Campo Nome obrigatório")
     protected String nome;

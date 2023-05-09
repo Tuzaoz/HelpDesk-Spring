@@ -5,10 +5,14 @@ import com.arthur.helpdeskspringangular.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 @Entity
-public class Chamado {
+public class Chamado implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -6686112632948273688L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
